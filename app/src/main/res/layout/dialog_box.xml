@@ -1,34 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:padding="10dp">
 
-    <EditText
-        android:id="@+id/editTitle"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/titleInputLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/title"
         android:textSize="28sp"
-        android:inputType="text"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:importantForAutofill="no" />
+        app:layout_constraintTop_toTopOf="parent">
 
-    <EditText
-        android:id="@+id/editContent"
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/editTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:importantForAutofill="no"
+            android:inputType="text"
+            android:textColorHint="#546E7A"
+            tools:ignore="VisualLintTextFieldSize,TextContrastCheck" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/contentInputLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/content"
         android:importantForAutofill="no"
-        android:inputType="text"
         android:minHeight="48dp"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/editTitle" />
+        app:layout_constraintTop_toBottomOf="@id/titleInputLayout">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/editContent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:textColorHint="#546E7A"
+            tools:ignore="VisualLintTextFieldSize,TextContrastCheck" />
+
+    </com.google.android.material.textfield.TextInputLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/btnLayout"
@@ -38,25 +57,32 @@
         android:padding="10dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/editContent">
+        app:layout_constraintTop_toBottomOf="@id/contentInputLayout">
 
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/addButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="90dp"
+            android:layout_marginEnd="10dp"
+            android:padding="15dp"
             android:text="@string/add"
+            app:layout_constraintEnd_toStartOf="@id/cancelButton"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
+            app:layout_constraintTop_toTopOf="parent" />
 
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/cancelButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:padding="15dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="90dp"
             android:text="@string/cancel"
+            app:layout_constraintStart_toEndOf="@id/addButton"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>
