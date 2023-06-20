@@ -23,7 +23,7 @@ class NoteAdapter(var notes : List<Note>, private val noteItemClickInterface: No
         val note = notes[position]
         holder.titleTextView.text = note.title
         holder.contentTextView.text = note.content
-        holder.timeStampTextView.text = Utils.getTimeAgo(note.timeStamp)
+        holder.timeStampTextView.text = Utils.getTimeAgo(note.timeStamp).toString()
     }
 
     override fun getItemCount(): Int {
