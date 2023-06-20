@@ -8,6 +8,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
@@ -21,6 +22,7 @@ class MainActivity : AppCompatActivity(), NoteAdapter.NoteItemClickInterface {
     private lateinit var noteAdapter: NoteAdapter
     private lateinit var fabAddNote: FloatingActionButton
     private lateinit var noteViewModel: NoteViewModel
+    private lateinit var searchView : androidx.appcompat.widget.SearchView
 
     private lateinit var notes : List<Note>
 
@@ -30,9 +32,24 @@ class MainActivity : AppCompatActivity(), NoteAdapter.NoteItemClickInterface {
         binding = ActivityMainBinding.inflate(layoutInflater)
         val view = binding?.root
         setContentView(view)
+
+        searchView = binding?.searchView!!
         recyclerView = binding?.recyclerView!!
         fabAddNote = binding?.addNote!!
         notes = ArrayList()
+
+        searchView.setOnQueryTextListener(object : androidx.appcompat.widget.SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String): Boolean {
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String): Boolean {
+                filterNotes(newText)
+                return true
+            }
+        })
+
+
 
         noteAdapter = NoteAdapter(notes,this)
         val spanCount = 2
@@ -45,14 +62,35 @@ class MainActivity : AppCompatActivity(), NoteAdapter.NoteItemClickInterface {
 
         noteViewModel = ViewModelProvider(this,factory)[NoteViewModel::class.java]
 
-        noteViewModel.getAllNotes().observe(this){
-            noteAdapter.notes = it
-            noteAdapter.notifyDataSetChanged()
-        }
+//        noteViewModel.getAllNotes().observe(this){
+//            noteAdapter.notes = it
+//            noteAdapter.notifyDataSetChanged()
+//        }
+        getAllNotes()
 
         fabAddNote.setOnClickListener {
             showAddNoteDialog()
         }
+    }
+
+    private fun getAllNotes() {
+        noteViewModel.getAllNotes().observe(this) { notesList ->
+            notes = notesList
+            filterNotes(searchView.query.toString())
+        }
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
+    private fun filterNotes(query: String) {
+        val filteredNotes = if (query.isNotEmpty()) {
+            notes.filter { note ->
+                note.title.contains(query, ignoreCase = true) || note.content.contains(query, ignoreCase = true)
+            }
+        } else {
+            notes
+        }
+        noteAdapter.notes = filteredNotes
+        noteAdapter.notifyDataSetChanged()
     }
 
     @SuppressLint("NotifyDataSetChanged")

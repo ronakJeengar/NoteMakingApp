@@ -1,5 +1,6 @@
 package com.ronakj.noting
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -36,5 +37,11 @@ class NoteAdapter(var notes : List<Note>, private val noteItemClickInterface: No
         val contentTextView: TextView = itemView.findViewById(R.id.content)
         val timeStampTextView: TextView = itemView.findViewById(R.id.timeStamp)
 
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
+    fun setData(notes: List<Note>) {
+        this.notes = notes
+        notifyDataSetChanged()
     }
 }
