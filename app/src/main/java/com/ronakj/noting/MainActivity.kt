@@ -7,15 +7,12 @@ import android.view.WindowManager
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
-import androidx.lifecycle.Observer
-import androidx.lifecycle.LiveData
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.ronakj.noting.databinding.ActivityMainBinding
-import com.ronakj.noting.NoteAdapter
 
 class MainActivity : AppCompatActivity(), NoteAdapter.NoteItemClickInterface {
 
@@ -38,7 +35,9 @@ class MainActivity : AppCompatActivity(), NoteAdapter.NoteItemClickInterface {
         notes = ArrayList()
 
         noteAdapter = NoteAdapter(notes,this)
-        recyclerView.layoutManager = LinearLayoutManager(this)
+        val spanCount = 2
+//        recyclerView.layoutManager = LinearLayoutManager(this)
+        recyclerView.layoutManager = StaggeredGridLayoutManager(spanCount,StaggeredGridLayoutManager.VERTICAL)
         recyclerView.adapter = noteAdapter
 
         val noteRepository = NoteRepository(NoteDatabase(this))
