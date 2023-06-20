@@ -17,6 +17,8 @@ class Utils {
             val diff = now - time
             return if (diff < MINUTE_MILLIS) {
                 "just now"
+            } else if(diff < 1.5 * MINUTE_MILLIS){
+                "few seconds ago"
             } else if (diff < 2 * MINUTE_MILLIS) {
                 "a minute ago"
             } else if (diff < 50 * MINUTE_MILLIS) {
