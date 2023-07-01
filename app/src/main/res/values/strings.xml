@@ -1,11 +1,14 @@
 <resources>
-    <string name="app_name">Noting</string>
+    <string name="app_name">NewNotes</string>
+    <string name="add">add</string>
+    <string name="note">Note</string>
     <string name="image">image</string>
     <string name="note_title">Note Title</string>
-    <string name="note_content">Note Content</string>
-    <string name="note_timestamp">Note Timestamp</string>
-    <string name="content">Content</string>
+    <string name="note_content">Note\n</string>
+    <string name="note_timestamp">Timestamp\n</string>
     <string name="title">Title</string>
-    <string name="add">Add</string>
-    <string name="cancel">cancel</string>
+    <string name="back_button">Back Button</string>
+    <string name="check">Check</string>
+    <string name="delete">Delete</string>
+    <string name="date">Date</string>
 </resources>
